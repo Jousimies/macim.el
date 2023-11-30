@@ -143,17 +143,20 @@ be called with the beginning position of the tailing whitespaces in region.")
              for cpunc in macim--ascii-punc-list
              do (puthash (kbd (concat prefix epunc)) (kbd (concat prefix cpunc)) macim--kbd-map)))
 
+(defvar current-system-input-method nil)
 ;;; helper
 
 (defsubst macim-select-ascii ()
   "Select the ASCII-capable keyboard input source.
 
 Expects to be added to normal hooks."
-  (macim-set macim-ascii))
+  (macim-set macim-ascii)
+  (setq current-system-input-method nil))
 
 (defsubst macim-select-other ()
   "Select the other input source defined by `macim-other'."
-  (macim-set macim-other))
+  (macim-set macim-other)
+  (setq current-system-input-method t))
 
 (defsubst macim--ascii-p (str)
   "Predicate on STR is has no English characters."
